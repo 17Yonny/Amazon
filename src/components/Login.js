@@ -2,34 +2,37 @@ import React, { useState, useEffect, useContext, useReducer } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 import { auth } from "../firebase"
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+//import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 
 const Login = () => {  
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const history = useHistory()
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   
 
   const signIn = (e) => {
     e.preventDefault();
-   // auth.signInWithEmailAndPassword(email, password)
-     // .then((auth) => {
-       // console.log(auth);
+   auth
+   .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+       history.push("/")
         // Redirect or perform additional actions upon successful sign-in
-      //})
-      //.catch((error) => alert(error.message));
+      })
+      .catch((error) => alert(error.message));
   };
 
   const register = e =>{
     e.preventDefault()
-   auth 
-   .createUserWithEmailAndPassword(email, password)
-    .then((auth)=>{ 
-      console.log(auth)
+   auth
+   .createUserWithEmailAndPassword(email, password).then(
+    (auth) => {
+    if(auth) {
+    history.push("/")
+    }
     })
-    .catch(error =>alert(error.message))
+    .catch((error) => alert(error.message));
 };
 
 
@@ -75,7 +78,7 @@ return (
             type="text"
             value={email}
             placeholder="Email"
-            onChange={e => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value  )}
             required  
           />
           <h5>Password</h5>

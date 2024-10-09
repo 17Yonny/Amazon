@@ -16,18 +16,17 @@ const App =  ()=> {
   //const [isLoggedIn, setIsLoggedIn] = useState(false)
   
 
-   //useEffect(()=> {
-    //auth.onAuthStateChanged((authUser)=>{
-    //console.log("User is ->", authUser)
-
-     //if (authUser){
-      //setUser({ authUser })
-    //} else {
-      //setUser(null )
-    //}
-
-   //})
-  //}, []);
+   useEffect(()=> {
+    auth.onAuthStateChanged((authUser)=>{
+    console.log("User is ->", authUser)
+  
+    if (authUser){
+    setUser({ user: authUser })
+    } else {
+      setUser({user: null})
+    }
+})
+}, []);
 
    //useEffect(() => {
     //const unsubscribe = auth.onAuthStateChanged(user => {

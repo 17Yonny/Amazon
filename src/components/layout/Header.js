@@ -16,7 +16,6 @@ const Header = () => {
     if (user) {
       auth.signOut()
     }
-
   }
   return (
    // <AuthContext.Consumer>
